@@ -1,7 +1,6 @@
 package io.alron.vkeducationproject
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.core.net.toUri
 import io.alron.vkeducationproject.screens.MainActivityScreen
 import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
-import androidx.core.net.toUri
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +26,9 @@ class MainActivity : ComponentActivity() {
                         },
                         onCall = { phoneNumber ->
                             onCall(phoneNumber)
+                        },
+                        onShare = { message ->
+                            onShare(message)
                         },
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -46,5 +48,15 @@ class MainActivity : ComponentActivity() {
             data = "tel:$phoneNumber".toUri()
         }
         startActivity(intent)
+    }
+
+    private fun onShare(message: String) {
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
+        }
+        val chooser = Intent.createChooser(intent, "Поделиться через...")
+        startActivity(chooser)
     }
 }

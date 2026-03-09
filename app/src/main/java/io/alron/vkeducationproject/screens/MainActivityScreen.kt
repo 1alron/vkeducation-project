@@ -33,6 +33,7 @@ import io.alron.vkeducationproject.R
 
 @Composable
 fun MainActivityScreen(
+    onShare: (String) -> Unit,
     onCall: (String) -> Unit,
     onOpenSecondActivityScreen: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -110,6 +111,16 @@ fun MainActivityScreen(
                 onClick = {
                     if (validateTextFieldPhoneNumber()) {
                         onCall(textFieldValue)
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(8.dp))
+            MainActivityScreenButton(
+                buttonTextId = R.string.share_text,
+                onClick = {
+                    if (validateTextFieldNotBlank()) {
+                        onShare(textFieldValue)
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
