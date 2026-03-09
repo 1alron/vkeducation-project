@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">VK Education Project</string>
+
+    <string name="input_text">Введите текст</string>
+    <string name="open_second_activity">Открыть вторую Activity</string>
+    <string name="text_from_first_activity">Текст из первой Activity:</string>
+    <string name="field_cannot_be_empty">Поле не может быть пустым</string>
+    <string name="warning_icon">Предупреждающая иконка</string>
 </resources>

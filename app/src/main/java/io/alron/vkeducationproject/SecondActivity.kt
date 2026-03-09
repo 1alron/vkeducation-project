@@ -1,6 +1,5 @@
 package io.alron.vkeducationproject
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,30 +8,30 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import io.alron.vkeducationproject.screens.MainActivityScreen
+import io.alron.vkeducationproject.screens.SecondActivityScreen
 import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
 
-class MainActivity : ComponentActivity() {
+class SecondActivity :  ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val message = getMessageFromFirstActivity()
+
         setContent {
             VKEducationProjectTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainActivityScreen(
-                        onOpenSecondActivityScreen = { message ->
-                            onOpenSecondActivity(message)
-                        },
-                        modifier = Modifier.padding(innerPadding)
+                    SecondActivityScreen(
+                        message = message,
+                        modifier = Modifier
+                            .padding(innerPadding)
                     )
                 }
             }
         }
     }
 
-    private fun onOpenSecondActivity(message: String) {
-        val intent = Intent(this, SecondActivity::class.java)
-        intent.putExtra("message", message)
-        startActivity(intent)
+    private fun getMessageFromFirstActivity(): String {
+        return intent.getStringExtra("message") ?: ""
     }
 }
