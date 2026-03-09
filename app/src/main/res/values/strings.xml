@@ -6,4 +6,6 @@
     <string name="text_from_first_activity">Текст из первой Activity:</string>
     <string name="field_cannot_be_empty">Поле не может быть пустым</string>
     <string name="warning_icon">Предупреждающая иконка</string>
+    <string name="call_friend">Позвонить другу</string>
+    <string name="invalid_phone_format">Некорректный формат телефонного номера</string>
 </resources>

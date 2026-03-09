@@ -1,6 +1,7 @@
 package io.alron.vkeducationproject
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import io.alron.vkeducationproject.screens.MainActivityScreen
 import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
+import androidx.core.net.toUri
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,9 @@ class MainActivity : ComponentActivity() {
                         onOpenSecondActivityScreen = { message ->
                             onOpenSecondActivity(message)
                         },
+                        onCall = { phoneNumber ->
+                            onCall(phoneNumber)
+                        },
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -33,6 +38,13 @@ class MainActivity : ComponentActivity() {
     private fun onOpenSecondActivity(message: String) {
         val intent = Intent(this, SecondActivity::class.java)
         intent.putExtra("message", message)
+        startActivity(intent)
+    }
+
+    private fun onCall(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = "tel:$phoneNumber".toUri()
+        }
         startActivity(intent)
     }
 }

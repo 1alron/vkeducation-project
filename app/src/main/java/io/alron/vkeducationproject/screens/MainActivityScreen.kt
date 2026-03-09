@@ -1,5 +1,7 @@
 package io.alron.vkeducationproject.screens
 
+import android.util.Patterns
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,15 +33,26 @@ import io.alron.vkeducationproject.R
 
 @Composable
 fun MainActivityScreen(
+    onCall: (String) -> Unit,
     onOpenSecondActivityScreen: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var textFieldValue by rememberSaveable { mutableStateOf("") }
     var textFieldSupportingTextId: Int? by rememberSaveable { mutableStateOf(null) }
 
-    fun validateTextField(): Boolean {
+    fun validateTextFieldNotBlank(): Boolean {
         if (textFieldValue.isBlank()) {
             textFieldSupportingTextId = R.string.field_cannot_be_empty
+            return false
+        }
+        return true
+    }
+
+    fun validateTextFieldPhoneNumber(): Boolean {
+        if (!validateTextFieldNotBlank()) {
+            return false
+        } else if (!Patterns.PHONE.matcher(textFieldValue).matches()) {
+            textFieldSupportingTextId = R.string.invalid_phone_format
             return false
         }
         return true
@@ -54,6 +67,7 @@ fun MainActivityScreen(
             modifier = Modifier
                 .padding(16.dp)
                 .widthIn(max = 540.dp)
+                .fillMaxSize()
         ) {
             OutlinedTextField(
                 value = textFieldValue,
@@ -81,17 +95,40 @@ fun MainActivityScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(Modifier.height(12.dp))
-            Button(
+            MainActivityScreenButton(
+                buttonTextId = R.string.open_second_activity,
                 onClick = {
-                    if (validateTextField()) {
+                    if (validateTextFieldNotBlank()) {
                         onOpenSecondActivityScreen(textFieldValue)
                     }
                 },
-                shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.open_second_activity))
-            }
+            )
+            Spacer(Modifier.height(8.dp))
+            MainActivityScreenButton(
+                buttonTextId = R.string.call_friend,
+                onClick = {
+                    if (validateTextFieldPhoneNumber()) {
+                        onCall(textFieldValue)
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
+    }
+}
+
+@Composable
+fun MainActivityScreenButton(
+    @StringRes buttonTextId: Int,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = { onClick() },
+        shape = RoundedCornerShape(12.dp),
+        modifier = modifier
+    ) {
+        Text(stringResource(buttonTextId))
     }
 }
