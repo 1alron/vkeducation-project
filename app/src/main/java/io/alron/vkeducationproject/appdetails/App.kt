@@ -1,4 +1,6 @@
-package io.alron.vkeducationproject
+package io.alron.vkeducationproject.appdetails
+
+import io.alron.vkeducationproject.Category
 
 data class App(
     val name: String,

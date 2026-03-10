@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject
+package io.alron.vkeducationproject.appdetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -23,6 +23,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import io.alron.vkeducationproject.Category
+import io.alron.vkeducationproject.R
+import io.alron.vkeducationproject.getCategoryText
 import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
 import kotlin.math.roundToInt
 
@@ -81,14 +84,6 @@ fun AppDetailsHeader(
             }
         }
     }
-}
-
-// Статичные строки, которые не приходят из бэкенда
-// нужно хранить в ресурсах (strings.xml).
-@Composable
-private fun getCategoryText(category: Category): String = when (category) {
-    Category.APP -> stringResource(R.string.category_app)
-    Category.GAME -> stringResource(R.string.category_game)
 }
 
 @Preview(showBackground = true)

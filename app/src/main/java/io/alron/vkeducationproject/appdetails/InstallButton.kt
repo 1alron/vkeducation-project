@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject
+package io.alron.vkeducationproject.appdetails
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.alron.vkeducationproject.R
 import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
 
 @Composable
