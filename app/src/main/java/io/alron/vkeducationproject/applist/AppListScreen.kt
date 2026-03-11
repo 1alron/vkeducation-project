@@ -1,7 +1,6 @@
 package io.alron.vkeducationproject.applist
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +21,7 @@ import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListScreen(
+    onAppClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val appListItemStructureList = remember { getAppListItemStructureList() }
@@ -42,21 +42,18 @@ fun AppListScreen(
     ) { innerPadding ->
         LazyColumn(
             contentPadding = innerPadding,
-            verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = modifier
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
             itemsIndexed(
                 appListItemStructureList,
-            ) { _, item ->
+            ) { index, item ->
                 AppListItem(
-                    appListItemStructure = AppListItemStructure(
-                        name = item.name,
-                        description = item.description,
-                        category = item.category,
-                        iconUrl = item.iconUrl
-                    )
+                    appListItemStructure = item,
+                    onClick = {
+                        onAppClick(index)
+                    }
                 )
             }
         }
@@ -134,6 +131,8 @@ private fun getAppListItemStructureList(): List<AppListItemStructure> = listOf(
 @Composable
 fun AppListScreenPreview() {
     VKEducationProjectTheme {
-        AppListScreen()
+        AppListScreen(
+            onAppClick = { }
+        )
     }
 }

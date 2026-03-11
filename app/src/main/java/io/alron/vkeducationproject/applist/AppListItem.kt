@@ -1,5 +1,6 @@
 package io.alron.vkeducationproject.applist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,12 +25,18 @@ import io.alron.vkeducationproject.getCategoryText
 @Composable
 fun AppListItem(
     appListItemStructure: AppListItemStructure,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .clickable { onClick() }
+    ) {
+        Spacer(Modifier.height(8.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
             AsyncImage(
                 model = appListItemStructure.iconUrl,
@@ -57,7 +64,7 @@ fun AppListItem(
                 )
             }
         }
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(8.dp))
         HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
     }
 }
