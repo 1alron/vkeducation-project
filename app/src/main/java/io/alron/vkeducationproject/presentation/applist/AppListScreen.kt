@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.alron.vkeducationproject.R
+import io.alron.vkeducationproject.domain.AppSummary
 import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
 import kotlinx.coroutines.flow.Flow
 
@@ -44,7 +45,7 @@ fun AppListScreen(
                 onAppClick = onAppClick,
                 onLogoClick = { viewModel.showSnackbar() },
                 events = viewModel.events,
-                appListItemStructureList = currentState.appListItemStructureList
+                appSummaries = currentState.appSummaries
             )
         }
 
@@ -66,7 +67,7 @@ fun AppListScreen(
 private fun AppListContent(
     events: Flow<ScreenEvent>,
     onLogoClick: () -> Unit,
-    appListItemStructureList: List<AppListItemStructure>,
+    appSummaries: List<AppSummary>,
     onAppClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -109,10 +110,10 @@ private fun AppListContent(
                 .fillMaxSize()
         ) {
             itemsIndexed(
-                appListItemStructureList,
+                appSummaries,
             ) { index, item ->
                 AppListItem(
-                    appListItemStructure = item,
+                    appSummary = item,
                     onClick = {
                         onAppClick(index)
                     }

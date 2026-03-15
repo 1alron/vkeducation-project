@@ -20,11 +20,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import io.alron.vkeducationproject.domain.AppSummary
 import io.alron.vkeducationproject.presentation.getCategoryText
 
 @Composable
 fun AppListItem(
-    appListItemStructure: AppListItemStructure,
+    appSummary: AppSummary,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -39,7 +40,7 @@ fun AppListItem(
                 .fillMaxWidth()
         ) {
             AsyncImage(
-                model = appListItemStructure.iconUrl,
+                model = appSummary.iconUrl,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -49,17 +50,17 @@ fun AppListItem(
             Spacer(Modifier.width(16.dp))
             Column(modifier = Modifier.fillMaxSize()) {
                 Text(
-                    text = appListItemStructure.name,
+                    text = appSummary.name,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = appListItemStructure.description,
+                    text = appSummary.description,
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
                     text = getCategoryText(
-                        appListItemStructure.category
+                        appSummary.category
                     ),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.secondary
