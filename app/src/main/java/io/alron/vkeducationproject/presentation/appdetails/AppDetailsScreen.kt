@@ -27,11 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.alron.vkeducationproject.R
+import io.alron.vkeducationproject.domain.AppDetails
 import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
 
 @Composable
 fun AppDetailsScreen(
-    appDetailsId: Int,
+    appDetailsId: String,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -41,8 +42,7 @@ fun AppDetailsScreen(
     when (val currentState = state) {
         is AppDetailsState.Content -> {
             AppDetailsContent(
-                appDetailsList = currentState.appDetailsList,
-                appDetailsId = appDetailsId,
+                appDetails = currentState.appDetails,
                 onBackClick = onBackClick,
                 modifier = modifier,
             )
@@ -62,8 +62,7 @@ fun AppDetailsScreen(
 
 @Composable
 private fun AppDetailsContent(
-    appDetailsList: List<AppDetails>,
-    appDetailsId: Int,
+    appDetails: AppDetails,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -81,7 +80,7 @@ private fun AppDetailsContent(
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
-            appDetails = appDetailsList[appDetailsId],
+            appDetails = appDetails,
             modifier = Modifier.padding(horizontal = 16.dp),
         )
         Spacer(Modifier.height(16.dp))
@@ -95,12 +94,12 @@ private fun AppDetailsContent(
         )
         Spacer(Modifier.height(12.dp))
         ScreenshotsList(
-            screenshotUrlList = appDetailsList[appDetailsId].screenshotUrlList,
+            screenshotUrlList = appDetails.screenshotUrlList,
             contentPadding = PaddingValues(horizontal = 16.dp),
         )
         Spacer(Modifier.height(12.dp))
         AppDescription(
-            description = appDetailsList[appDetailsId].description,
+            description = appDetails.description,
             collapsed = descriptionCollapsed,
             onReadMoreClick = {
                 descriptionCollapsed = true
@@ -116,7 +115,7 @@ private fun AppDetailsContent(
         )
         Spacer(Modifier.height(12.dp))
         Developer(
-            name = appDetailsList[appDetailsId].developer,
+            name = appDetails.developer,
             onClick = {
                 Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
             },
@@ -132,7 +131,7 @@ private fun AppDetailsContent(
 private fun Preview() {
     VKEducationProjectTheme {
         AppDetailsScreen(
-            appDetailsId = 0,
+            appDetailsId = "2343532",
             onBackClick = { },
             modifier = Modifier.fillMaxSize(),
         )

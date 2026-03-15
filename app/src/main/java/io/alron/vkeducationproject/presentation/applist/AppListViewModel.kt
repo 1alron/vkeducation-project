@@ -2,7 +2,7 @@ package io.alron.vkeducationproject.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.alron.vkeducationproject.presentation.Category
+import io.alron.vkeducationproject.domain.Category
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

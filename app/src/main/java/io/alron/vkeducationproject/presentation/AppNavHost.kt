@@ -32,11 +32,11 @@ fun AppNavHost() {
             route = Route.AppDetails.route,
             arguments = listOf(
                 navArgument("appDetailsId") {
-                    type = NavType.IntType
+                    type = NavType.StringType
                 }
             )
         ) { backStackEntry ->
-            val appDetailsId = backStackEntry.arguments?.getInt("appDetailsId") ?: 0
+            val appDetailsId = backStackEntry.arguments?.getString("appDetailsId") ?: ""
 
             AppDetailsScreen(
                 appDetailsId = appDetailsId,

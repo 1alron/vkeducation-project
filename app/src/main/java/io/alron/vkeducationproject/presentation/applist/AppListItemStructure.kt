@@ -1,6 +1,6 @@
 package io.alron.vkeducationproject.presentation.applist
 
-import io.alron.vkeducationproject.presentation.Category
+import io.alron.vkeducationproject.domain.Category
 
 data class AppListItemStructure(
     val name: String,

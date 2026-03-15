@@ -1,6 +1,6 @@
 package io.alron.vkeducationproject.presentation
 
-sealed class Route(val route: String) {
+internal sealed class Route(val route: String) {
 
     object AppList : Route("app_list")
 

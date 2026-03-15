@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import io.alron.vkeducationproject.R
-import io.alron.vkeducationproject.presentation.Category
+import io.alron.vkeducationproject.domain.AppDetails
+import io.alron.vkeducationproject.domain.Category
 import io.alron.vkeducationproject.presentation.getCategoryText
 import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
 import kotlin.math.roundToInt
@@ -92,6 +93,7 @@ fun AppDetailsHeader(
 @Composable
 private fun Preview() {
     val appDetails = AppDetails(
+        id = "393868735",
         name = "Гильдия Героев: Экшен ММО РПГ",
         developer = "VK Play",
         category = Category.GAME,
