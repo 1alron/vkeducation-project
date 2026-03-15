@@ -18,5 +18,7 @@
     <string name="under_developement">В процессе разработки</string>
     <string name="error">Ошибка!</string>
 
+    <string name="network_error">Ошибка сети!</string>
+
     <string name="my_store">MyStore</string>
 </resources>

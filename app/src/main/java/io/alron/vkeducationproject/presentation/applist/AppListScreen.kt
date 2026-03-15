@@ -9,9 +9,13 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -22,6 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.alron.vkeducationproject.R
 import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,6 +42,8 @@ fun AppListScreen(
             AppListContent(
                 modifier = modifier,
                 onAppClick = onAppClick,
+                onLogoClick = { viewModel.showSnackbar() },
+                events = viewModel.events,
                 appListItemStructureList = currentState.appListItemStructureList
             )
         }
@@ -57,12 +64,30 @@ fun AppListScreen(
 
 @Composable
 private fun AppListContent(
+    events: Flow<ScreenEvent>,
+    onLogoClick: () -> Unit,
     appListItemStructureList: List<AppListItemStructure>,
     onAppClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val underDevelopmentText = stringResource(R.string.under_developement)
+
+    val networkErrorText = stringResource(R.string.network_error)
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(events) {
+        events.collect { event ->
+            when (event) {
+                is ScreenEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(event.message)
+                }
+                is ScreenEvent.NetworkError -> {
+                    snackbarHostState.showSnackbar(networkErrorText)
+                }
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -71,9 +96,11 @@ private fun AppListContent(
                     Toast
                         .makeText(context, underDevelopmentText, Toast.LENGTH_SHORT)
                         .show()
-                }
+                },
+                onLogoClick = onLogoClick
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { innerPadding ->
         LazyColumn(
             contentPadding = innerPadding,

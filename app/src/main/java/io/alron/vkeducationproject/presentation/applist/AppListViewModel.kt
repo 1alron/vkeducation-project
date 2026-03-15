@@ -3,16 +3,21 @@ package io.alron.vkeducationproject.presentation.applist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.alron.vkeducationproject.presentation.Category
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
 class AppListViewModel : ViewModel() {
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
     val state: StateFlow<AppListState> = _state.asStateFlow()
+
+    private val _events = Channel<ScreenEvent>(Channel.BUFFERED)
+    val events = _events.receiveAsFlow()
 
     init {
         loadListItemStructureList()
@@ -27,6 +32,14 @@ class AppListViewModel : ViewModel() {
             }.onFailure {
                 _state.value = AppListState.Error
             }
+        }
+    }
+
+    fun showSnackbar() {
+        viewModelScope.launch {
+            _events.send(
+                ScreenEvent.ShowSnackbar("Лого")
+            )
         }
     }
 

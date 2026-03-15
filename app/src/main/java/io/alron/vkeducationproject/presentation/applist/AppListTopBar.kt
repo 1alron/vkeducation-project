@@ -22,18 +22,20 @@ import io.alron.vkeducationproject.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListTopBar(
+    onLogoClick: () -> Unit,
     onActionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_stacks),
-                    contentDescription = null,
-                    modifier = Modifier.size(28.dp)
-                )
-                Spacer(Modifier.width(4.dp))
+                IconButton(onClick = onLogoClick) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_stacks),
+                        contentDescription = null,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
                 Text(
                     text = stringResource(R.string.my_store)
                 )
