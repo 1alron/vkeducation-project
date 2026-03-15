@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject.appdetails
+package io.alron.vkeducationproject.presentation.appdetails
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import io.alron.vkeducationproject.R
-import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
+import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
 
 @Composable
 fun Developer(

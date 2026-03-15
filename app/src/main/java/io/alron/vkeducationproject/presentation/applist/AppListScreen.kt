@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject.applist
+package io.alron.vkeducationproject.presentation.applist
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,9 +14,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.alron.vkeducationproject.Category
 import io.alron.vkeducationproject.R
-import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
+import io.alron.vkeducationproject.presentation.Category
+import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

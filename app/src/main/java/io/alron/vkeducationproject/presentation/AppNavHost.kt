@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject
+package io.alron.vkeducationproject.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawingPadding
@@ -9,8 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import io.alron.vkeducationproject.appdetails.AppDetailsScreen
-import io.alron.vkeducationproject.applist.AppListScreen
+import io.alron.vkeducationproject.presentation.appdetails.AppDetailsScreen
+import io.alron.vkeducationproject.presentation.applist.AppListScreen
 
 @Composable
 fun AppNavHost() {
@@ -22,8 +22,8 @@ fun AppNavHost() {
     ) {
         composable(Route.AppList.route) {
             AppListScreen(
-                onAppClick = { appId ->
-                    navController.navigate(Route.AppDetails.createRoute(appId))
+                onAppClick = { appDetailsId ->
+                    navController.navigate(Route.AppDetails.createRoute(appDetailsId))
                 }
             )
         }
@@ -31,15 +31,15 @@ fun AppNavHost() {
         composable(
             route = Route.AppDetails.route,
             arguments = listOf(
-                navArgument("appId") {
+                navArgument("appDetailsId") {
                     type = NavType.IntType
                 }
             )
         ) { backStackEntry ->
-            val appId = backStackEntry.arguments?.getInt("appId") ?: 0
+            val appDetailsId = backStackEntry.arguments?.getInt("appDetailsId") ?: 0
 
             AppDetailsScreen(
-                appId = appId,
+                appDetailsId = appDetailsId,
                 onBackClick = {
                     navController.popBackStack()
                 },

@@ -16,6 +16,7 @@
 
     <string name="app_details_developer">Разработчик</string>
     <string name="under_developement">В процессе разработки</string>
+    <string name="error">Ошибка!</string>
 
     <string name="my_store">MyStore</string>
 </resources>
