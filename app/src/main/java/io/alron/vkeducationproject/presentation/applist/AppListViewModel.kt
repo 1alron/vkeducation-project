@@ -28,14 +28,21 @@ class AppListViewModel @Inject constructor(
 
     fun getAppSummaries() {
         viewModelScope.launch {
-            runCatching {
-                _state.value = AppListState.Loading
+            _state.value = AppListState.Loading
 
-                val appSummaries = appSummariesRepository.get()
+            val result = runCatching {
+                appSummariesRepository.get()
+            }
 
-                _state.value = AppListState.Content(appSummaries)
-            }.onFailure {
-                _state.value = AppListState.Error
+            result.onSuccess { summaries ->
+                _state.value = AppListState.Content(summaries)
+            }
+
+            // не очень юзер-френдли, но для учебного проекта думаю сойдет :)
+            result.onFailure { throwable ->
+                _state.value = AppListState.Error(
+                    throwable.localizedMessage ?: "Неизвестная ошибка"
+                )
             }
         }
     }

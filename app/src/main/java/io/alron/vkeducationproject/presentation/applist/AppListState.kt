@@ -4,7 +4,7 @@ import io.alron.vkeducationproject.domain.AppSummary
 
 sealed interface AppListState {
     data object Loading : AppListState
-    data object Error : AppListState
+    data class Error(val message: String) : AppListState
     data class Content(
         val appSummaries: List<AppSummary>
     ) : AppListState

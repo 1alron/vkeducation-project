@@ -50,9 +50,10 @@ fun AppListScreen(
             )
         }
 
-        AppListState.Error -> {
+        is AppListState.Error -> {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.error))
+                // Text(stringResource(R.string.error))
+                Text(currentState.message)
             }
         }
 
