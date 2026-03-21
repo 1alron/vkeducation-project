@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject.appdetails
+package io.alron.vkeducationproject.presentation.appdetails
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import io.alron.vkeducationproject.ui.theme.VKEducationProjectTheme
+import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
 
 @Composable
 internal fun Toolbar(

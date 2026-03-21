@@ -1,0 +1,10 @@
+package io.alron.vkeducationproject.presentation
+
+sealed class Route(val route: String) {
+
+    object AppList : Route("app_list")
+
+    object AppDetails : Route("app_details/{appDetailsId}") {
+        fun createRoute(appDetailsId: Int) = "app_details/$appDetailsId"
+    }
+}

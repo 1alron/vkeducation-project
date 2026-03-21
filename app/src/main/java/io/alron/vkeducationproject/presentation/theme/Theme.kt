@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject.ui.theme
+package io.alron.vkeducationproject.presentation.theme
 
 import android.app.Activity
 import android.os.Build

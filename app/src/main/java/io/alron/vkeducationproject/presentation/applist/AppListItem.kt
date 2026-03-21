@@ -1,4 +1,4 @@
-package io.alron.vkeducationproject.applist
+package io.alron.vkeducationproject.presentation.applist
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import io.alron.vkeducationproject.getCategoryText
+import io.alron.vkeducationproject.presentation.getCategoryText
 
 @Composable
 fun AppListItem(
@@ -58,7 +58,9 @@ fun AppListItem(
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = getCategoryText(appListItemStructure.category),
+                    text = getCategoryText(
+                        appListItemStructure.category
+                    ),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.secondary
                 )
