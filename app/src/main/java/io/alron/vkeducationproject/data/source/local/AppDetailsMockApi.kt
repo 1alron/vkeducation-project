@@ -1,18 +1,19 @@
-package io.alron.vkeducationproject.data
+package io.alron.vkeducationproject.data.source.local
 
+import io.alron.vkeducationproject.data.AppDetailsDto
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
 // Представим, что тут вызывается бекенд :)
-class AppDetailsApi @Inject constructor() {
+class AppDetailsMockApi @Inject constructor() {
     suspend fun get(id: String): AppDetailsDto {
         delay(2.seconds)
         return AppDetailsDto(
             id = "346235",
             name = "Яндекс Браузер с Алисой AI",
             developer = "ООО \"ЯНДЕКС\"",
-            category = "App",
+            category = "Приложения",
             ageRating = 0,
             size = 143.3f,
             screenshotUrlList = listOf(

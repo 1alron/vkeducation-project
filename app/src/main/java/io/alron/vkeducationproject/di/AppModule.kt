@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.alron.vkeducationproject.data.AppDetailsRepositoryImpl
 import io.alron.vkeducationproject.data.AppDetailsRepositoryMockImpl
 import io.alron.vkeducationproject.data.AppSummariesRepositoryImpl
 import io.alron.vkeducationproject.domain.AppDetailsRepository
