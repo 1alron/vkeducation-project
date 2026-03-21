@@ -1,5 +1,6 @@
-package io.alron.vkeducationproject.data
+package io.alron.vkeducationproject.data.source.local
 
+import io.alron.vkeducationproject.data.AppSummaryDto
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 

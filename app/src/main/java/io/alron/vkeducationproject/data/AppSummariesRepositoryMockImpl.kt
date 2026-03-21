@@ -1,5 +1,6 @@
 package io.alron.vkeducationproject.data
 
+import io.alron.vkeducationproject.data.source.local.AppSummariesApi
 import io.alron.vkeducationproject.domain.AppSummariesRepository
 import io.alron.vkeducationproject.domain.AppSummary
 

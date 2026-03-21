@@ -2,7 +2,7 @@ package io.alron.vkeducationproject.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.alron.vkeducationproject.data.AppSummariesApi
+import io.alron.vkeducationproject.data.source.local.AppSummariesApi
 import io.alron.vkeducationproject.data.AppSummariesRepositoryMockImpl
 import io.alron.vkeducationproject.data.AppSummaryMapper
 import io.alron.vkeducationproject.data.CategoryMapper
