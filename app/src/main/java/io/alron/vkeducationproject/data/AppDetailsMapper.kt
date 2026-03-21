@@ -1,8 +1,9 @@
 package io.alron.vkeducationproject.data
 
 import io.alron.vkeducationproject.domain.AppDetails
+import javax.inject.Inject
 
-class AppDetailsMapper(
+class AppDetailsMapper @Inject constructor(
     private val categoryMapper: CategoryMapper
 ) {
     fun toDomain(dto: AppDetailsDto) = AppDetails(

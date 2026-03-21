@@ -2,24 +2,18 @@ package io.alron.vkeducationproject.presentation.appdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.alron.vkeducationproject.data.AppDetailsApi
-import io.alron.vkeducationproject.data.AppDetailsMapper
-import io.alron.vkeducationproject.data.AppDetailsRepositoryMockImpl
-import io.alron.vkeducationproject.data.CategoryMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.alron.vkeducationproject.domain.AppDetailsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppDetailsViewModel : ViewModel() {
-    // В будущем применим DI
-    private val appDetailsRepository: AppDetailsRepository = AppDetailsRepositoryMockImpl(
-        mapper = AppDetailsMapper(
-            CategoryMapper()
-        ),
-        api = AppDetailsApi()
-    )
+@HiltViewModel
+class AppDetailsViewModel @Inject constructor(
+    private val appDetailsRepository: AppDetailsRepository
+): ViewModel() {
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state: StateFlow<AppDetailsState> = _state.asStateFlow()
 

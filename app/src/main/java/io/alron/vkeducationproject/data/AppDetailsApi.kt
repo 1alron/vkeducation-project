@@ -1,10 +1,11 @@
 package io.alron.vkeducationproject.data
 
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
 // Представим, что тут вызывается бекенд :)
-class AppDetailsApi {
+class AppDetailsApi @Inject constructor() {
     suspend fun get(id: String): AppDetailsDto {
         delay(2.seconds)
         return AppDetailsDto(

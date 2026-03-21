@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import io.alron.vkeducationproject.R
@@ -35,7 +36,7 @@ fun AppListScreen(
     onAppClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val viewModel = viewModel<AppListViewModel>()
+    val viewModel: AppListViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when (val currentState = state) {
