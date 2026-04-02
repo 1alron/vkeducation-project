@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import io.alron.vkeducationproject.data.source.local.AppDatabase
 import io.alron.vkeducationproject.data.source.local.AppDetailsDao
 import io.alron.vkeducationproject.data.source.local.AppDetailsEntityMapper
+import io.alron.vkeducationproject.data.source.local.migrations.MIGRATION_1_2
 import javax.inject.Singleton
 
 @Module
@@ -21,7 +22,9 @@ class DatabaseModule {
             app,
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     @Provides

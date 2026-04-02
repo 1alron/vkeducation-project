@@ -41,7 +41,7 @@ fun AppDetailsScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(appDetailsId) {
-        viewModel.getAppDetails(appDetailsId)
+        viewModel.startObserving(appDetailsId)
     }
 
     when (val currentState = state) {
@@ -49,6 +49,7 @@ fun AppDetailsScreen(
             AppDetailsContent(
                 appDetails = currentState.appDetails,
                 onBackClick = onBackClick,
+                onWishlistClick = { viewModel.toggleWishlist(appDetailsId) },
                 modifier = modifier,
             )
         }
@@ -67,6 +68,7 @@ fun AppDetailsScreen(
 
 @Composable
 private fun AppDetailsContent(
+    onWishlistClick: () -> Unit,
     appDetails: AppDetails,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -82,6 +84,8 @@ private fun AppDetailsContent(
             onShareClick = {
                 Toast.makeText(context, underDevelopmentText, Toast.LENGTH_SHORT).show()
             },
+            isInWishlist = appDetails.isInWishlist,
+            onWishlistClick = onWishlistClick,
         )
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
