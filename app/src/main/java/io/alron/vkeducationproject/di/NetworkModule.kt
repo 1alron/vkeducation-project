@@ -5,6 +5,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.alron.vkeducationproject.BuildConfig
+import io.alron.vkeducationproject.data.AppDetailsMapper
+import io.alron.vkeducationproject.data.CategoryMapper
 import io.alron.vkeducationproject.data.source.remote.AppDetailsApi
 import io.alron.vkeducationproject.data.source.remote.AppSummariesApi
 import retrofit2.Retrofit
@@ -30,4 +32,14 @@ class NetworkModule {
     @Singleton
     fun provideAppDetailsApi(retrofit: Retrofit): AppDetailsApi =
         retrofit.create(AppDetailsApi::class.java)
+
+    @Provides
+    @Singleton
+    fun providesAppDetailsMapper(categoryMapper: CategoryMapper): AppDetailsMapper =
+        AppDetailsMapper(categoryMapper)
+
+    @Provides
+    @Singleton
+    fun providesCategoryMapper(): CategoryMapper =
+        CategoryMapper()
 }
