@@ -14,6 +14,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +40,10 @@ fun AppDetailsScreen(
     val viewModel: AppDetailsViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    LaunchedEffect(appDetailsId) {
+        viewModel.getAppDetails(appDetailsId)
+    }
+
     when (val currentState = state) {
         is AppDetailsState.Content -> {
             AppDetailsContent(
@@ -47,9 +52,9 @@ fun AppDetailsScreen(
                 modifier = modifier,
             )
         }
-        AppDetailsState.Error -> {
+        is AppDetailsState.Error -> {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.error))
+                Text(currentState.message)
             }
         }
         AppDetailsState.Loading -> {

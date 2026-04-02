@@ -17,20 +17,23 @@ class AppDetailsViewModel @Inject constructor(
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state: StateFlow<AppDetailsState> = _state.asStateFlow()
 
-    init {
-        getAppDetails()
-    }
-
-    fun getAppDetails() {
+    fun getAppDetails(id: String) {
         viewModelScope.launch {
-            runCatching {
-                _state.value = AppDetailsState.Loading
+            _state.value = AppDetailsState.Loading
 
-                val appDetails = appDetailsRepository.get("тут должен быть id :)")
+            val result = runCatching {
+                appDetailsRepository.get(id)
+            }
 
+            result.onSuccess { appDetails ->
                 _state.value = AppDetailsState.Content(appDetails)
-            }.onFailure {
-                _state.value = AppDetailsState.Error
+            }
+
+            // аналогично, не очень юзер-френдли, но для учебного проекта думаю сойдет :)
+            result.onFailure { throwable ->
+                _state.value = AppDetailsState.Error(
+                    throwable.localizedMessage ?: "Неизвестная ошибка"
+                )
             }
         }
     }

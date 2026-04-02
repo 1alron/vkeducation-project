@@ -50,9 +50,7 @@ fun AppDetailsHeader(
         Spacer(Modifier.width(16.dp))
         Column {
             Text(
-                text = getCategoryText(
-                    appDetails.category
-                ),
+                text = appDetails.category,
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 12.sp,
             )
@@ -96,7 +94,7 @@ private fun Preview() {
         id = "393868735",
         name = "Гильдия Героев: Экшен ММО РПГ",
         developer = "VK Play",
-        category = Category.GAME,
+        category = "Игры",
         ageRating = 12,
         size = 223.7f,
         screenshotUrlList = listOf(

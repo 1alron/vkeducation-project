@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import io.alron.vkeducationproject.R
 import io.alron.vkeducationproject.domain.AppSummary
 import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
@@ -33,7 +32,7 @@ import kotlinx.coroutines.flow.Flow
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListScreen(
-    onAppClick: (Int) -> Unit,
+    onAppClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val viewModel: AppListViewModel = hiltViewModel()
@@ -50,9 +49,9 @@ fun AppListScreen(
             )
         }
 
-        AppListState.Error -> {
+        is AppListState.Error -> {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(stringResource(R.string.error))
+                Text(currentState.message)
             }
         }
 
@@ -69,7 +68,7 @@ private fun AppListContent(
     events: Flow<ScreenEvent>,
     onLogoClick: () -> Unit,
     appSummaries: List<AppSummary>,
-    onAppClick: (Int) -> Unit,
+    onAppClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -112,11 +111,11 @@ private fun AppListContent(
         ) {
             itemsIndexed(
                 appSummaries,
-            ) { index, item ->
+            ) { _, item ->
                 AppListItem(
                     appSummary = item,
                     onClick = {
-                        onAppClick(index)
+                        onAppClick(item.id)
                     }
                 )
             }

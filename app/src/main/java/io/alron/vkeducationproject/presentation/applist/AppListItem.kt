@@ -21,7 +21,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import io.alron.vkeducationproject.domain.AppSummary
-import io.alron.vkeducationproject.presentation.getCategoryText
 
 @Composable
 fun AppListItem(
@@ -59,9 +58,7 @@ fun AppListItem(
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = getCategoryText(
-                        appSummary.category
-                    ),
+                    text = appSummary.category,
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.secondary
                 )
