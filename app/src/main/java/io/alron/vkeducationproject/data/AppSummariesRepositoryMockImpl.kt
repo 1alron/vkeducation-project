@@ -3,8 +3,9 @@ package io.alron.vkeducationproject.data
 import io.alron.vkeducationproject.data.source.local.AppSummariesApi
 import io.alron.vkeducationproject.domain.AppSummariesRepository
 import io.alron.vkeducationproject.domain.AppSummary
+import javax.inject.Inject
 
-class AppSummariesRepositoryMockImpl(
+class AppSummariesRepositoryMockImpl @Inject constructor(
     private val mapper: AppSummaryMapper,
     private val api: AppSummariesApi
 ) : AppSummariesRepository {

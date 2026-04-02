@@ -24,8 +24,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import io.alron.vkeducationproject.R
 import io.alron.vkeducationproject.domain.AppDetails
 import io.alron.vkeducationproject.presentation.theme.VKEducationProjectTheme
@@ -36,7 +36,7 @@ fun AppDetailsScreen(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val viewModel = viewModel<AppDetailsViewModel>()
+    val viewModel: AppDetailsViewModel = hiltViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when (val currentState = state) {

@@ -2,9 +2,10 @@ package io.alron.vkeducationproject.data.source.local
 
 import io.alron.vkeducationproject.data.AppSummaryDto
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-class AppSummariesApi {
+class AppSummariesApi @Inject constructor() {
     suspend fun get(): List<AppSummaryDto> {
         delay(1.seconds) // типа к бекенду обращаемся :)
         return listOf(
