@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.alron.vkeducationproject.data.AppDetailsRepositoryImpl
-import io.alron.vkeducationproject.data.AppDetailsRepositoryMockImpl
 import io.alron.vkeducationproject.data.AppSummariesRepositoryImpl
 import io.alron.vkeducationproject.domain.AppDetailsRepository
 import io.alron.vkeducationproject.domain.AppSummariesRepository
@@ -17,5 +16,5 @@ interface AppModule {
     fun bindAppSummariesRepository(impl: AppSummariesRepositoryImpl): AppSummariesRepository
 
     @Binds
-    fun bindAppDetailsRepository(impl: AppDetailsRepositoryMockImpl): AppDetailsRepository
+    fun bindAppDetailsRepository(impl: AppDetailsRepositoryImpl): AppDetailsRepository
 }
