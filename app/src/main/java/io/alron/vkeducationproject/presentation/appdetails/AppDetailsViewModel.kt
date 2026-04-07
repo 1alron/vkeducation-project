@@ -7,34 +7,37 @@ import io.alron.vkeducationproject.domain.AppDetailsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AppDetailsViewModel @Inject constructor(
     private val appDetailsRepository: AppDetailsRepository
-): ViewModel() {
+) : ViewModel() {
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state: StateFlow<AppDetailsState> = _state.asStateFlow()
 
-    fun getAppDetails(id: String) {
+    fun startObserving(id: String) {
+        observeAppDetails(id)
+    }
+
+    fun toggleWishlist(id: String) {
         viewModelScope.launch {
-            _state.value = AppDetailsState.Loading
+            appDetailsRepository.toggleWishlist(id)
+        }
+    }
 
-            val result = runCatching {
-                appDetailsRepository.get(id)
-            }
-
-            result.onSuccess { appDetails ->
-                _state.value = AppDetailsState.Content(appDetails)
-            }
-
-            // аналогично, не очень юзер-френдли, но для учебного проекта думаю сойдет :)
-            result.onFailure { throwable ->
-                _state.value = AppDetailsState.Error(
-                    throwable.localizedMessage ?: "Неизвестная ошибка"
-                )
-            }
+    private fun observeAppDetails(id: String) {
+        viewModelScope.launch {
+            appDetailsRepository.observeAppDetails(id)
+                .catch {
+                    _state.value =
+                        AppDetailsState.Error(it.localizedMessage ?: "Неизвестная ошибка")
+                }
+                .collect { appDetails ->
+                    _state.value = AppDetailsState.Content(appDetails = appDetails)
+                }
         }
     }
 }
