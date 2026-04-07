@@ -34,12 +34,10 @@ class NetworkModule {
         retrofit.create(AppDetailsApi::class.java)
 
     @Provides
-    @Singleton
     fun providesAppDetailsMapper(categoryMapper: CategoryMapper): AppDetailsMapper =
         AppDetailsMapper(categoryMapper)
 
     @Provides
-    @Singleton
     fun providesCategoryMapper(): CategoryMapper =
         CategoryMapper()
 }
