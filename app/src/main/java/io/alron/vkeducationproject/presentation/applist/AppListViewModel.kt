@@ -3,7 +3,7 @@ package io.alron.vkeducationproject.presentation.applist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.alron.vkeducationproject.domain.AppSummariesRepository
+import io.alron.vkeducationproject.domain.GetAppSummariesUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
-    private val appSummariesRepository: AppSummariesRepository
+    private val getAppSummariesUseCase: GetAppSummariesUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
     val state: StateFlow<AppListState> = _state.asStateFlow()
@@ -31,14 +31,13 @@ class AppListViewModel @Inject constructor(
             _state.value = AppListState.Loading
 
             val result = runCatching {
-                appSummariesRepository.get()
+                getAppSummariesUseCase()
             }
 
             result.onSuccess { summaries ->
                 _state.value = AppListState.Content(summaries)
             }
 
-            // не очень юзер-френдли, но для учебного проекта думаю сойдет :)
             result.onFailure { throwable ->
                 _state.value = AppListState.Error(
                     throwable.localizedMessage ?: "Неизвестная ошибка"
